@@ -1,0 +1,18 @@
+### IAM Role for AWS Glue Job
+
+1. **Create an IAM Role**:
+   - **Go to**: IAM Console -> Roles -> Create role.
+   - **Select**: AWS service -> Glue.
+
+2. **Attach Policies**:
+   - **Attach** the following AWS managed policies:
+     - **AmazonS3FullAccess**
+     - **AWSGlueConsoleFullAccess**
+     - **AWSGlueServiceRole**
+     - **AWSLambda_FullAccess**
+     - **AWSLambdaExecute**
+     - **CloudWatchFullAccess**
+
+3. **Review and Create**:
+   - **Name** the role (e.g., `AWSGlueJobRole`).
+   - **Attach** this role to your AWS Glue job.

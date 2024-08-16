@@ -1,0 +1,23 @@
+### IAM Role for AWS Lambda
+
+**Policies to Attach:**
+
+1. **AmazonS3FullAccess** (AWS Managed)
+2. **AWSGlueConsoleFullAccess** (AWS Managed)
+3. **AWSGlueServiceRole** (AWS Managed)
+4. **AWSLambda_FullAccess** (AWS Managed)
+5. **AWSLambdaExecute** (AWS Managed)
+6. **CloudWatchFullAccess** (AWS Managed)
+
+**Steps:**
+
+1. **Create Role**:
+   - Go to IAM Console -> Roles -> Create role.
+   - Choose "Lambda" as the trusted entity.
+
+2. **Attach Policies**:
+   - Attach the above policies.
+
+3. **Name and Create**:
+   - Name the role (e.g., `LambdaExecutionRole`).
+   - Create and attach the role to your Lambda function.

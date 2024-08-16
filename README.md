@@ -4,6 +4,10 @@
 
 **AWS Data Pipeline Framework** is a comprehensive solution for building and managing AWS data pipelines. This project integrates AWS Glue, Lambda, S3, IAM, and CloudWatch to demonstrate automated ETL processes, secure data handling, and robust monitoring.
 
+## 🏗️Architecture
+
+ ![Architecture](dataengg.png)
+
 ## 🔧 Features
 
 - **AWS Glue**: 🛠️ Create and manage ETL pipelines for data processing.
@@ -20,39 +24,89 @@
 - **AWS CLI**: Installed and configured.
 - **IAM Permissions**: Sufficient IAM roles and policies attached.
 
-### 📦 Setup
+## 🛠️ Implementation Steps
+Certainly! Here is a professional and precise set of implementation steps for setting up the AWS Data Engineering Pipeline:
 
-1. **Clone the Repository**
+---
 
-    ```bash
-    git clone https://github.com/your-username/aws-data-pipeline-framework.git
-    cd aws-data-pipeline-framework
-    ```
+## 🛠️ Implementation Steps
 
-2. **Configure AWS Services**
+### 1. Set Up AWS Account and Region
+   - Sign up for an AWS account at [AWS Sign Up](https://aws.amazon.com/), or log in to your existing account via the [AWS Management Console](https://aws.amazon.com/console/).
 
-   - **Create IAM Roles**: Attach necessary policies to roles for Glue, Lambda, and other services.
-   - **Set Up AWS Glue Jobs**: Define ETL jobs according to your data processing needs.
-   - **Create Lambda Functions**: Set up functions to trigger Glue jobs.
-   - **Configure S3 Buckets**: Define storage buckets for input and output data.
-   - **Set Up CloudWatch Alarms**: Configure monitoring and alerts for pipeline activities.
+### 2. Create S3 Buckets
 
-3. **Deploy and Test**
+1. **Navigate to S3 Service**:
+   - Go to the [Amazon S3 Console](https://s3.console.aws.amazon.com/).
 
-    - **Deploy** your AWS resources using CloudFormation or manually via the AWS Console.
-    - **Test** your data pipeline by running Glue jobs and monitoring with CloudWatch.
+2. **Create Buckets**:
+   - Click **Create bucket** and provide the following names for the buckets with their respective configurations:
+     - **csvinput**: For storing input CSV files.
+     - **jsonoutput**: For storing output JSON files.
+     - **gluejob**: For temporary storage related to Glue jobs.
 
-## 🧩 Usage
+3. **Basic Configuration**:
+   - Choose default settings for bucket creation unless specific configurations are required for your use case.
 
-1. **Trigger Glue Jobs**: Use Lambda functions to start Glue jobs based on events or schedules.
-2. **Monitor Pipelines**: Track job status and logs in AWS CloudWatch.
-3. **Manage Data**: Handle data storage and retrieval using Amazon S3.
+### 3. Create an AWS Glue ETL Job
 
-## 🤝 Contributing
+1. **Navigate to AWS Glue Console**:
+   - Go to the [AWS Glue Console](https://console.aws.amazon.com/glue/).
 
-Contributions are welcome! Please fork the repository and submit a pull request with your proposed changes.
+2. **Create a New ETL Job**:
+   - In the AWS Glue Console, select **Jobs** and click **Add job**.
+   - Choose the **Script editor** or **Visual ETL** option to define your ETL job.
 
-## 📬 Contact
+3. **Provide ETL Script**:
+   - Use the provided [AWS Glue DataPipeline CSV_to_Json](#) for the job. Ensure you copy and paste the script into the script editor or configure it accordingly in the visual ETL interface.
 
-For any questions or support, please contact [your-email@example.com](mailto:your-email@example.com).
+### 4. Configure the Glue Job
 
+1. **Job Configuration**:
+   - Configure job properties such as job name, IAM role, and other settings as per your requirements.
+   
+2. **Attach Necessary IAM Policies**:
+   - Attach IAM policies to the Glue job role as described in the [IAM Role for AWS Glue Job](#). Ensure that the role has permissions for S3 access, Glue operations, and other required services.
+
+### 5. Create a Lambda Function
+
+1. **Navigate to AWS Lambda Console**:
+   - Go to the [AWS Lambda Console](https://console.aws.amazon.com/lambda/).
+
+2. **Create a Basic Lambda Function**:
+   - Click **Create function** and choose **Author from scratch**.
+   - Name the function, select Python as the runtime, and create the function.
+
+3. **Add S3 Trigger**:
+   - Configure a trigger to invoke the Lambda function when a new CSV file is uploaded to the **csvinput** bucket.
+
+### 6. Write Lambda Function Code
+
+1. **Lambda Function Code**:
+   - Use the provided [lambdaFunction](#) to invoke the Glue job. Paste the code into the Lambda function editor.
+
+2. **Configure Lambda Execution Role**:
+   - Attach the necessary IAM role to the Lambda function, as specified in the [IAM Role for AWS Lambda](#). Ensure the role has permissions to invoke Glue jobs and access S3 buckets.
+
+### 7. Test the Data Pipeline
+
+1. **Upload CSV File**:
+   - Upload a CSV file to the **csvinput** S3 bucket.
+
+2. **Verify Trigger**:
+   - Ensure the Lambda function is triggered and initiates the Glue job.
+
+### 8. Monitor Logs
+
+1. **View CloudWatch Logs**:
+   - Navigate to the [AWS CloudWatch Console](https://console.aws.amazon.com/cloudwatch/).
+   - Check logs for both the Lambda function and Glue job to monitor their execution and troubleshoot any issues.
+
+### 9. Verify Output
+
+1. **Check Output S3 Bucket**:
+   - After the Glue job completes, verify that the processed JSON file appears in the **jsonoutput** S3 bucket.
+
+## Copyright
+
+© Sravanthi Thukivakam [2024]

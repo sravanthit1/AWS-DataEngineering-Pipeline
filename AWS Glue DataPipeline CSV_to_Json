@@ -1,0 +1,21 @@
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
+
+# Script generated for node Source Amazon S3
+SourceAmazonS3_node1723834036771 = glueContext.create_dynamic_frame.from_options(format_options={"quoteChar": "\"", "withHeader": True, "separator": ",", "optimizePerformance": False}, connection_type="s3", format="csv", connection_options={"paths": ["s3://s3inputcsv"], "recurse": True}, transformation_ctx="SourceAmazonS3_node1723834036771")
+
+# Script generated for node Destination Amazon S3
+DestinationAmazonS3_node1723834050535 = glueContext.write_dynamic_frame.from_options(frame=SourceAmazonS3_node1723834036771, connection_type="s3", format="json", connection_options={"path": "s3://s3outputjson", "partitionKeys": []}, transformation_ctx="DestinationAmazonS3_node1723834050535")
+
+job.commit()

@@ -106,6 +106,7 @@ Certainly! Here is a professional and precise set of implementation steps for se
 
 1. **Check Output S3 Bucket**:
    - After the Glue job completes, verify that the processed JSON file appears in the **jsonoutput** S3 bucket.
+     ![Output](screenshots.drawio.png)
 
 ## Copyright
 
